@@ -1,8 +1,5 @@
 "use strict";
 
-// Key array defaults to the konami code :
-const defaultSeries = [38,38,40,40,37,39,37,39,66,65];
-
 /**
  * This private function gets called when the last character just added to the array doesn't match the corresponding
  * character in the array you are matching against.
@@ -61,7 +58,6 @@ const findMatchingSegment = (charArr, currArr, currI) => {
 
 module.exports = (charArr, callback) => {
     let currArr = [];
-    charArr = charArr || defaultSeries;
 
     return (charCode) => {
         currArr.push(charCode);
@@ -70,7 +66,7 @@ module.exports = (charArr, callback) => {
             currArr = findMatchingSegment(charArr, currArr);
         }
 
-        console.log(charCode, charArr, currArr)
+        // console.log(charCode, charArr, currArr)
         if (currArr.length === charArr.length) {
             if (callback && (typeof callback === 'function')) {
                 callback();
