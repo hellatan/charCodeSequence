@@ -1,5 +1,5 @@
 {
-  "name": "charCodeSequence",
+  "name": "char-code-sequence",
   "version": "0.0.1",
   "description": "detect that a sequence of characters was pressed in succession",
   "main": "index.js",
