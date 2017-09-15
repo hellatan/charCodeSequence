@@ -23,7 +23,7 @@
 const findMatchingSegment = (charArr, currArr, currI) => {
 
     const lastIdx = currArr.length - 1;
-    currI = (typeof currI === 'number') ? currI : lastIdx;
+    currI = (typeof currI === 'number') ? currI : lastIdx - 1;
     let highestMatchingIdx;
     while (currI >= 0) {
         if (charArr[currI] === currArr[lastIdx]) {
@@ -39,9 +39,8 @@ const findMatchingSegment = (charArr, currArr, currI) => {
 
     let noViolations = true;
     let j = highestMatchingIdx;
-    let k = lastIdx;
     while (j >= 0) {
-        if (charArr[j] !== currArr[k]) {
+        if (charArr[j] !== currArr[j]) {
             j = 0;
             noViolations = false;
         }
@@ -66,7 +65,6 @@ module.exports = (charArr, callback) => {
             currArr = findMatchingSegment(charArr, currArr);
         }
 
-        // console.log(charCode, charArr, currArr)
         if (currArr.length === charArr.length) {
             if (callback && (typeof callback === 'function')) {
                 callback();
