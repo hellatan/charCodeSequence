@@ -55,8 +55,9 @@ const findMatchingSegment = (charArr, currArr, currI) => {
 
 };
 
-module.exports = (charArr, callback) => {
+module.exports = (sequence = [], callback) => {
     let currArr = [];
+    const charArr = [...sequence];
 
     return (charCode) => {
         currArr.push(charCode);

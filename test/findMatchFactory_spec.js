@@ -1,18 +1,21 @@
+"use strict";
+
 const findMatchFactory = require('../src/findMatchFactory');
 const { expect } = require('chai');
 
-describe("findMatchFactory", () => {
 
-    let findMatch;
+const testSequence = sequence => {
+
     let called = 0;
-    const charArr = [1, 2, 3];
+    let charArr = [...sequence];
     const callback = () => {
         ++called;
     };
+    const findMatch = findMatchFactory(charArr, callback);;
 
     beforeEach(() => {
         called = 0;
-        findMatch = findMatchFactory(charArr, callback);
+        charArr = charArr = [...sequence];
     });
 
     it('should return a function', () => {
@@ -20,33 +23,47 @@ describe("findMatchFactory", () => {
     });
 
     it('should invoke a callback if the set satisfied', () => {
-        [1, 2, 3].forEach(findMatch);
+        [...charArr].forEach(findMatch);
         expect(called).to.equal(1);
     });
 
     it('should not invoke a callback if the set was not satisfied', () => {
-        [1, 2, 4].forEach(findMatch);
+        charArr.pop();
+        [...charArr, 999].forEach(findMatch);
         expect(called).to.equal(0);
     });
 
-    it('should invoke a callback if the a complicated set containing the set is executed', () => {
-        [1, 2, 1, 2, 3].forEach(findMatch);
+    it('should invoke a callback if a complicated set containing the set is executed', () => {
+        charArr.pop();        
+        [...charArr, ...sequence].forEach(findMatch);
         expect(called).to.equal(1);
     });
 
     it('should invoke a callback twice if the set was executed twice', () => {
-        [1, 2, 3, 1, 2, 3].forEach(findMatch);
+        [...charArr, ...charArr ].forEach(findMatch);
         expect(called).to.equal(2);
     });
 
     it('should invoke a callback twice if the set was executed twice but spaced out', () => {
-        [1, 2, 3, 4, 5, 1, 2, 3].forEach(findMatch);
+        [...charArr, 998, 999, ...charArr].forEach(findMatch);
         expect(called).to.equal(2);
     });
 
     it('should invoke a callback once if the set was executed twice but spaced out', () => {
-        [1, 2, 1, 2, 1, 2, 3, 1].forEach(findMatch);
+        charArr.pop();        
+        [...charArr, ...charArr, ...charArr, ...sequence, 999].forEach(findMatch);
         expect(called).to.equal(1);
+    });
+};
+
+describe("findMatchFactory", () => {
+
+    describe("detecting 1, 2, 3", () => {
+        testSequence([1, 2, 3]);
+    });
+
+    describe("detecting my name", () => {
+        testSequence(['r', 'o', 'n', 'a', 'l', 'd']);
     });
 
 });
