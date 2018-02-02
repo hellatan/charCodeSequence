@@ -4,6 +4,19 @@ const findMatchFactory = require('../src/findMatchFactory');
 const { expect } = require('chai');
 
 
+// a more specific test if you want to test a specific case designed to trip up the algorithm
+const testSpecificStrings = (sequence, typedString) => {
+    it(`should invoke callback once for "${sequence}" and "${typedString}"`, () => {
+        const findMatch = findMatchFactory(sequence.split(''), () => called++);
+        const typedArr = typedString.split('');
+        let called = 0;
+        typedArr.forEach(findMatch);
+        expect(called).to.equal(1);
+        });
+}
+
+// a battery of tests that are designed to trip up different versions of characters, including 
+// inserting different characters in between, at the end, etc.
 const testSequence = sequence => {
 
     let called = 0;
@@ -50,7 +63,7 @@ const testSequence = sequence => {
     });
 
     it('should invoke a callback once if the set was executed twice but spaced out', () => {
-        charArr.pop();        
+        charArr.pop();
         [...charArr, ...charArr, ...charArr, ...sequence, 999].forEach(findMatch);
         expect(called).to.equal(1);
     });
@@ -72,6 +85,14 @@ describe("findMatchFactory", () => {
 
     describe("detecting repeating words", () => {
         testSequence('ron ron'.split(''));
+    });
+
+    describe("detecting special case one on one", () => {
+        const sequence = 'one on one';
+        testSequence(sequence.split(''));
+        // do a test with specific string designed to torpedo
+        testSpecificStrings(sequence, 'one on one on one one');
+        testSpecificStrings(sequence, 'oni on one on one two');
     });
 
 });
