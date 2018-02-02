@@ -63,7 +63,15 @@ describe("findMatchFactory", () => {
     });
 
     describe("detecting my name", () => {
-        testSequence(['r', 'o', 'n', 'a', 'l', 'd']);
+        testSequence('ronald'.split(''));
+    });
+
+    describe("detecting many words with spaces", () => {
+        testSequence('i am ronald'.split(''));
+    });
+
+    describe("detecting repeating words", () => {
+        testSequence('ron ron'.split(''));
     });
 
 });

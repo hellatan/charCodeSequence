@@ -10,8 +10,8 @@
  * in this case you can still keep [a, b, a] from the end of currArr, but you have to throw out [a, b] from the front
  *
  * Uses  recursion, take the case of :
- * charArr = [one me on]
- * currArr = [one me one]
+ * charArr  = [one me on]
+ * typedArr = [oni me one]
  *
  * I would work backwards matching the e from "one" to the e from "me" - but that doesn't fit, i need to fall back again
  * until i hit the first e, from "one."
@@ -20,40 +20,28 @@
  * @param currI
  * @returns {*}
  */
-const findMatchingSegment = (charArr, currArr, currI) => {
+ const findMatchingSegment = (charArr, currArr) => {
+    currArr.shift();
+    const lastChar = currArr[currArr.length - 1];
 
-    const lastIdx = currArr.length - 1;
-    currI = (typeof currI === 'number') ? currI : lastIdx - 1;
-    let highestMatchingIdx;
-    while (currI >= 0) {
-        if (charArr[currI] === currArr[lastIdx]) {
-            highestMatchingIdx = currI;
-            currI = 0;
+    while(currArr.length > 0) {
+        if (charArr[currArr.length - 1] === lastChar) {
+            // this might be a match! 
+            let match = true;
+            let currIdx = 0;
+            while (match && currIdx < currArr.length) {
+                match = charArr[currIdx] === currArr[currIdx];
+                ++currIdx;
+            }
+            if (match) {
+                return currArr;
+            }
         }
-        currI--;
+        currArr.shift();
     }
 
-    if (highestMatchingIdx === undefined) {
-        return [];
-    }
-
-    let noViolations = true;
-    let j = highestMatchingIdx;
-    while (j >= 0) {
-        if (charArr[j] !== currArr[j]) {
-            j = 0;
-            noViolations = false;
-        }
-        j--;
-    }
-
-    if (noViolations) {
-        return currArr.splice(lastIdx - highestMatchingIdx, lastIdx);
-    } else {
-        return findMatchingSegment(charArr, currArr, currI - 1);
-    }
-
-};
+    return currArr;
+}
 
 module.exports = (sequence = [], callback) => {
     let currArr = [];
