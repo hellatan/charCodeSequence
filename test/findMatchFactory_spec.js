@@ -90,9 +90,14 @@ describe("findMatchFactory", () => {
     describe("detecting special case one on one", () => {
         const sequence = 'one on one';
         testSequence(sequence.split(''));
-        // do a test with specific string designed to torpedo
+        // do a test with specific string designed to torpedo my algorithm
         testSpecificStrings(sequence, 'one on one on one one');
         testSpecificStrings(sequence, 'oni on one on one two');
+        testSpecificStrings(sequence, 'one one one on one two');
+    });
+    
+    describe("detecting 34345", () => {
+        testSpecificStrings('34345', '3434345');
     });
 
 });
