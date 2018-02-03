@@ -18,8 +18,9 @@ charCodeSequence.konami(myCallback); // [up, up, down, down, left, right, left, 
 
 This library doesn't support listening for characters like letters, etc. 
 Instead you must supply an array of key codes, that's the code associated with a key event such as 'keypress' or 'keydown'
+
 *Note - a 'keyCode' is not the same as it's corresponding 'charCode.'
-eg. pressing the letter 'a' yeilds a different keyCode than 
+eg. pressing the letter 'a' yeilds a different keyCode than and charCode
 
 ```javascript
 'a'.charCodeAt(0); // 97 
@@ -36,6 +37,7 @@ A naive approach to detecting a sequence is to match each letter in the sequence
 
 However, consider the following cases : 
 
+```
 code array = [1, 1, 2, 2]
 user input = [1, 1, 1, 2, 2]
 
@@ -44,6 +46,7 @@ user input = [3, 4, 3, 4, 3, 4, 5]
 
 search string = 'one on one'
 user types = 'one one on one'
+```
 
 The previous approach fails for these sequences because after we get to the first mis-matched character everything before is discarded, however the user did type the sequence. 
 
