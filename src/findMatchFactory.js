@@ -47,7 +47,7 @@ module.exports = (sequence = [], callback) => {
     let currArr = [];
     const charArr = [...sequence];
 
-    return (charCode) => {
+    function findMatch(charCode) {
         currArr.push(charCode);
 
         if (charCode !== charArr[currArr.length - 1]) {
@@ -61,4 +61,7 @@ module.exports = (sequence = [], callback) => {
             currArr.length = 0;
         }
     };
+
+    findMatch.currArr = currArr;
+    return findMatch;
 };
