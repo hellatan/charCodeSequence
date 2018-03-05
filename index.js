@@ -6,7 +6,7 @@ const findMatchFactory = require('./src/findMatchFactory');
 
 function charCodeSequence(charArr = [], callback) {
     const findMatch = findMatchFactory(charArr, callback);
-    let currLength;
+    let currLength = findMatch.currArr.length;
     findMatch.changeCallbacks = [];
 
     document.addEventListener('keypress', e => { // keypress required to get the correct charCode
