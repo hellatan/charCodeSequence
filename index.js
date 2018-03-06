@@ -28,5 +28,6 @@ function charCodeSequence(charArr = [], callback) {
     return findMatch;
 }
 
-module.exports = (arr, callback) => charCodeSequence(arr, callback);
+module.exports.listen = (arr, callback) => charCodeSequence(arr, callback);
 module.exports.konami = (callback) => charCodeSequence(konamiSeries, callback);
+module.exports.findMatchFactory = findMatchFactory;

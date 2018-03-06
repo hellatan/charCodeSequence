@@ -3,21 +3,51 @@
 A handy lightweight library that detects that a sequence of characters was pressed in succession.
 Once the key sequence is detected a callback in invoked.
 
-# Usage 
+# Usage
+
+``` javascript 
+const { listen, konami, findMatchFactory } = require('char-code-sequence');
+```
+
+## Supply an array of charCodes to listen for :
+
+``` javascript 
+const nameArray = [114, 111, 110]; // my name 'ron'
+const findNameMatch = listen(nameArray, () => console.log('boo yah, typed the whole thing.')));
+
+// access the current store of typed charCodes
+console.log(findNameMatch.currArr);
+```
+
+## Add onChange handlers, these will be invoked any time the array changes :
+
+``` javascript 
+findNameMatch.onChange(({ currArr, event }) => {
+    console.log('the keypress event: ', event);
+    console.log(currArr.map(code => String.fromCharCode(code)); // 'r', 'o', 'n'
+}));
+```
+
+## Built in support to listen for the konami code :
 
 ```javascript
-const charCodeSequence = require('char-code-sequence');
-charCodeSequence([65, 66, 67], myCallback); // ['a', 'b', 'c']
-
-// to listen for the popular konami code : 
 charCodeSequence.konami(myCallback); // [up, up, down, down, left, right, left, right, 'b', 'a']
 ```
+
+## Use the findMatchFactory function directly for other applications : 
+
+```javascript
+const findMatch = findMatchFactory([1, 2, 3], console.log);
+[1, 2, 1, 2, 1, 2, 3, 4].forEach(findMatch); // will console.log [1, 2, 3] after the full sequence is used
+```
+
 
 
 # charCodes vs. keyCodes
 
 This library doesn't support listening for characters like letters, etc. 
-Instead you must supply an array of charCodes, that's the code associated with the document event 'keypress'
+Instead you must supply an array of charCodes, that's the code associated with the document event 'keypress.'
+
 Note, this is distinct from the information you get from the 'keydown' event.
 Try the following in your browser's console : 
 
@@ -27,6 +57,7 @@ Try the following in your browser's console :
 ```
 
 The key code corresponds to a key on the keyboard that was pressed, while the charCode corresponds to a unicode character that was typed. 
+
 Source: http://www.dotnetfunda.com/forums/show/20870/diffrence-between-keycode-charcode-in-javascript-or-keycode-vs-charcod
 
 So pressing the letter 'a' yeilds a different keyCode than and charCode
@@ -37,9 +68,9 @@ document.addEventListener('keydown', e => console.log(e.which)); // user types '
 ```
 
 Here are a couple resources for discovering which char codes are which : 
-https://www.cambiaresearch.com/articles/15/javascript-char-codes-key-codes
-http://unixpapa.com/js/key.html
-http://keycode.info/
+- https://www.cambiaresearch.com/articles/15/javascript-char-codes-key-codes
+- http://unixpapa.com/js/key.html
+- http://keycode.info/
 
 In general, if you are looking for letters, use the following : 
 
@@ -47,15 +78,7 @@ In general, if you are looking for letters, use the following :
 - 97 - 123 = lower case letters
 - to get a corresponding lower case letter from an upper case letter, add 32
 - intergers (0 - 9) are in the range from 48 - 57
-
-
-# Usage
-
-``` javascript 
-const charCodeSequence = require('char-code-sequence');
-const findMatch = charCodeSequence([[114, 111, 110], () => console.log('boo yah, typed the whole thing.'))); // my name 'ron'
-findMatch.onChange(({ currArr }) => console.log(currArr.map(code => String.fromCharCode(code)))); // ['r', 'o', 'n']
-```
+- space is 32
 
 
 # Elegant solution 

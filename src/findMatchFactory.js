@@ -56,7 +56,7 @@ module.exports = (sequence = [], callback) => {
 
         if (currArr.length === charArr.length) {
             if (callback && (typeof callback === 'function')) {
-                callback();
+                callback(currArr);
             }
             currArr.length = 0;
         }
