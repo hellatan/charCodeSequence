@@ -82,7 +82,7 @@ In general, if you are looking for letters, use the following :
 
 # Elegant solution 
 
-A naive approach to detecting a sequence is to match each letter in the sequence, and if a mismatch is found, the start over.
+A naive approach to detecting a sequence is to match each letter in the sequence, and if a mismatch is found, then start over.
 
 However, consider the following cases : 
 
