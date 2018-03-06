@@ -28,12 +28,6 @@ findNameMatch.onChange(({ currArr, event }) => {
 }));
 ```
 
-## Built in support to listen for the konami code :
-
-```javascript
-charCodeSequence.konami(myCallback); // [up, up, down, down, left, right, left, right, 'b', 'a']
-```
-
 ## Use the findMatchFactory function directly for other applications : 
 
 ```javascript
@@ -41,6 +35,11 @@ const findMatch = findMatchFactory([1, 2, 3], console.log);
 [1, 2, 1, 2, 1, 2, 3, 4].forEach(findMatch); // will console.log [1, 2, 3] after the full sequence is used
 ```
 
+## Built in support to listen for the konami code :
+
+```javascript
+charCodeSequence.konami(myCallback); // [up, up, down, down, left, right, left, right, 'b', 'a']
+```
 
 
 # charCodes vs. keyCodes
