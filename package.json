@@ -1,6 +1,6 @@
 {
   "name": "char-code-sequence",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "description": "detect that a sequence of characters was pressed in succession",
   "main": "index.js",
   "repository": "git@github.com:nameofname/charCodeSequence.git",
@@ -10,7 +10,7 @@
     "chai": "^4.1.2",
     "mocha": "^4.1.0"
   },
-  "scripts":{
+  "scripts": {
     "test": "node ./node_modules/.bin/mocha --reporter spec"
   }
 }
