@@ -34,6 +34,9 @@ const findMatch = findMatchFactory('sam'.split(''), (currArr) => {
 
 'so sam went to the store sasasam was sad.'.split('').forEach(findMatch);
 console.log(called); // 2
+
+const findArrMatch = findMatchFactory([1, 2, 3], console.log);
+[1, 2, 1, 2, 1, 2, 3, 4].forEach(findArrMatch); // will console.log [1, 2, 3] after the full sequence is used
 ```
 
 ## Add onChange handlers, these will be invoked any time the array changes :
@@ -43,13 +46,6 @@ findNameMatch.onChange(({ currArr, event }) => {
     console.log('the keypress event: ', event);
     console.log(currArr.map(code => String.fromCharCode(code)); // 'r', 'o', 'n'
 }));
-```
-
-## Use the findMatchFactory function directly for other applications : 
-
-```javascript
-const findMatch = findMatchFactory([1, 2, 3], console.log);
-[1, 2, 1, 2, 1, 2, 3, 4].forEach(findMatch); // will console.log [1, 2, 3] after the full sequence is used
 ```
 
 ## Built in support to listen for the konami code :
