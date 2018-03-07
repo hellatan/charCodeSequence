@@ -43,7 +43,7 @@
     return currArr;
 }
 
-module.exports = (sequence = [], callback) => {
+function findMatchFactory(sequence = [], callback) {
     let currArr = [];
     const charArr = [...sequence];
 
@@ -65,3 +65,5 @@ module.exports = (sequence = [], callback) => {
     findMatch.currArr = currArr;
     return findMatch;
 };
+
+module.exports = findMatchFactory;

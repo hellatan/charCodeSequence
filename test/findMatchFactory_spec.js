@@ -5,14 +5,14 @@ const { expect } = require('chai');
 
 
 // a more specific test if you want to test a specific case designed to trip up the algorithm
-const testSpecificStrings = (sequence, typedString) => {
+const testSpecificStrings = (sequence, typedString, calledExpectation = 1) => {
     it(`should invoke callback once for "${sequence}" and "${typedString}"`, () => {
+        let called = 0;
         const findMatch = findMatchFactory(sequence.split(''), () => called++);
         const typedArr = typedString.split('');
-        let called = 0;
         typedArr.forEach(findMatch);
-        expect(called).to.equal(1);
-        });
+        expect(called).to.equal(calledExpectation);
+    });
 }
 
 // a battery of tests that are designed to trip up different versions of characters, including 
@@ -87,7 +87,7 @@ describe("findMatchFactory", () => {
         testSequence('ron ron'.split(''));
     });
 
-    describe("detecting special case one on one", () => {
+    describe("detecting special case 'one on one'", () => {
         const sequence = 'one on one';
         testSequence(sequence.split(''));
         // do a test with specific string designed to torpedo my algorithm
@@ -95,9 +95,13 @@ describe("findMatchFactory", () => {
         testSpecificStrings(sequence, 'oni on one on one two');
         testSpecificStrings(sequence, 'one one one on one two');
     });
-    
+
     describe("detecting 34345", () => {
         testSpecificStrings('34345', '3434345');
+    });
+
+    describe("detecting substring in longer string multiple times", () => {
+        testSpecificStrings('sam', 'so sam went to the store sasasam was sad.', 2);
     });
 
 });

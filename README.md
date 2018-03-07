@@ -19,6 +19,23 @@ const findNameMatch = listen(nameArray, () => console.log('boo yah, typed the wh
 console.log(findNameMatch.currArr);
 ```
 
+## Use the findMatchFactory directly :
+
+If you're not running your code in a browser, you can require the findMatchFactory directly to detect a sub-array or substring match
+
+```javascript
+const findMatchFactory = require('char-code-sequence/src/findMatchFactory');
+
+let called = 0;
+const findMatch = findMatchFactory('sam'.split(''), (currArr) => {
+    called++;
+    console.log(`found ${currArr.join('')} in the string!`);
+});
+
+'so sam went to the store sasasam was sad.'.split('').forEach(findMatch);
+console.log(called); // 2
+```
+
 ## Add onChange handlers, these will be invoked any time the array changes :
 
 ``` javascript 
