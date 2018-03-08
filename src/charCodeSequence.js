@@ -2,6 +2,7 @@
 
 
 const findMatchFactory = require('./findMatchFactory');
+function noop() {}
 
 
 function charCodeSequence(charArr = [], callback) {
@@ -9,15 +10,17 @@ function charCodeSequence(charArr = [], callback) {
     let currLength = findMatch.currArr.length;
     findMatch.changeCallbacks = [];
 
-    document.addEventListener('keypress', e => { // keypress required to get the correct charCode
-        findMatch(e.which);
-        if (currLength !== findMatch.currArr.length) {
-            findMatch.changeCallbacks.forEach(callback => {
-                callback({ event: e, currArr: findMatch.currArr });
-            });
-        }
-        currLength = findMatch.currArr.length;
-    });
+    if (typeof document !== 'undefined') {
+        document.addEventListener('keypress', e => { // keypress required to get the correct charCode
+            findMatch(e.which);
+            if (currLength !== findMatch.currArr.length) {
+                findMatch.changeCallbacks.forEach(callback => {
+                    callback({ event: e, currArr: findMatch.currArr });
+                });
+            }
+            currLength = findMatch.currArr.length;
+        });
+    }
 
     findMatch.onChange = function onChange (callback) {
         if (typeof callback === 'function') {

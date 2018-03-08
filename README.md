@@ -13,11 +13,13 @@ const { listenKeypress, konami, findMatchFactory } = require('char-code-sequence
 
 ``` javascript 
 const nameArray = [114, 111, 110]; // my name 'ron'
-const findNameMatch = listenKeypress(nameArray, () => console.log('boo yah, typed the whole thing.')));
+const findNameMatch = listenKeypress(nameArray, () => console.log('boo yah, typed the whole thing.'));
 
 // access the current store of typed charCodes
 console.log(findNameMatch.currArr);
 ```
+
+NOTE* This function works in Node.js - but it's essentially a no-op since no document object exists
 
 ## Use the findMatchFactory directly :
 
