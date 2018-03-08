@@ -119,7 +119,7 @@ The algorithm in this package efficiently disposes of typed characters that don'
 Coincidentally, the method of matching the end of the input and iteratively discarding characters that don't match produces a highly efficient solution for a sub-array match algorithm.  Check out the code example above titled 'Use the findMatchFactory directly.' 
 
 You could also use this algorithm in a stream, I've provided a sample of that as well : 
-// TODO ! ADD LINK!!!!!!!!!!!!!!!!
+[Stream Sample](samples/stream.js)
 
 # Everything is unit tested and beautiful
 
