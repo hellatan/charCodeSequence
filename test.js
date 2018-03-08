@@ -2,40 +2,34 @@
 
 // const findMatchStream = require('./src/findMatchStream.js')
 const findMatchFactory = require('./src/findMatchFactory');
-const { Readable, Transform } = require('stream');
+const { Readable, Writable, Transform } = require('stream');
 
 
 
-const findMatch = findMatchFactory(['r', 'o', 'n'], currArr => {
-    console.log('PLAY IT FORWARD!', accumulator.push(accumulator.count.toString()))
-    // this.push(++this.count);
+const findMatch = findMatchFactory('ron'.split(''), currArr => {
+    ++accumulator.count;
+    accumulator.push(`\n I found ${accumulator.count} instances of 'ron'`);
 });
 
 const accumulator = new Transform({
 
     readableObjectMode: true,
 
-    // count: 0,
     transform(chunk, encoding, callback) {
-        const char = chunk.toString().trim();
-        console.log('this.count', char, this.count, findMatch.currArr)
-        findMatch(char);
-        console.log('this.count', char, this.count, findMatch.currArr)
-        // this.push(this.count.toString());
+        findMatch(chunk.toString());
         callback();
     }
 });
 accumulator.count = 0;
 
-
-const logStream = new Readable({
+const arr = 'ron ald is raw ro ro ro ron hey moron.'.split('');
+let idx = -1; 
+const readString = new Readable({
     read(currCount) {
-        console.log('logStream currCount', currCount)
-        this.push(currCount)
+        this.push(arr[++idx] ? arr[idx] : null);
     }
-})
+});
 
-process.stdin
+readString
     .pipe(accumulator)
-    // .pipe(logStream)
     .pipe(process.stdout);
