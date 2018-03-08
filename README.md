@@ -6,14 +6,14 @@ Once the key sequence is detected a callback in invoked.
 # Usage
 
 ``` javascript 
-const { listen, konami, findMatchFactory } = require('char-code-sequence');
+const { listenKeypress, konami, findMatchFactory } = require('char-code-sequence');
 ```
 
 ## Supply an array of charCodes to listen for :
 
 ``` javascript 
 const nameArray = [114, 111, 110]; // my name 'ron'
-const findNameMatch = listen(nameArray, () => console.log('boo yah, typed the whole thing.')));
+const findNameMatch = listenKeypress(nameArray, () => console.log('boo yah, typed the whole thing.')));
 
 // access the current store of typed charCodes
 console.log(findNameMatch.currArr);
@@ -93,7 +93,7 @@ In general, if you are looking for letters, use the following :
 - space is 32
 
 
-# Elegant solution 
+# Proper solution 
 
 A naive approach to detecting a sequence is to match each letter in the sequence, and if a mismatch is found, then start over.
 
@@ -118,7 +118,8 @@ The algorithm in this package efficiently disposes of typed characters that don'
 
 Coincidentally, the method of matching the end of the input and iteratively discarding characters that don't match produces a highly efficient solution for a sub-array match algorithm.  Check out the code example above titled 'Use the findMatchFactory directly.' 
 
-You could also use this algorithm in a stream. 
+You could also use this algorithm in a stream, I've provided a sample of that as well : 
+// TODO ! ADD LINK!!!!!!!!!!!!!!!!
 
 # Everything is unit tested and beautiful
 
