@@ -49,11 +49,14 @@ function findMatchFactory(sequence = [], callback) {
 
     function findMatch(charCode) {
         currArr.push(charCode);
+        console.log('inner within-ness', charCode, currArr, sequence)
 
         if (charCode !== charArr[currArr.length - 1]) {
+            console.log('ITS NO GOOD')
             currArr = findMatchingSegment(charArr, currArr);
         }
 
+        console.log('THE LENGHTS', currArr.length, charArr.length)
         if (currArr.length === charArr.length) {
             if (callback && (typeof callback === 'function')) {
                 callback(currArr);
