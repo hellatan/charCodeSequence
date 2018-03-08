@@ -57,7 +57,7 @@ charCodeSequence.konami(myCallback); // [up, up, down, down, left, right, left, 
 
 # charCodes vs. keyCodes
 
-This library doesn't support listening for characters like letters, etc. 
+The listenKeypress function doesn't support listening for characters like letters, etc. 
 Instead you must supply an array of charCodes, that's the code associated with the document event 'keypress.'
 
 Note, this is distinct from the information you get from the 'keydown' event.
@@ -84,7 +84,7 @@ Here are a couple resources for discovering which char codes are which :
 - http://unixpapa.com/js/key.html
 - http://keycode.info/
 
-In general, if you are looking for letters, use the following : 
+Use this key for simple strings (if you want special characters look those up using the links above) :
 
 - 65 - 91 = upper case letters
 - 97 - 123 = lower case letters

@@ -91,14 +91,22 @@ describe("findMatchFactory", () => {
         const sequence = 'one on one';
         testSequence(sequence.split(''));
         // do a test with specific string designed to torpedo my algorithm
-        testSpecificStrings(sequence, 'one on one on one one');
         testSpecificStrings(sequence, 'oni on one on one two');
         testSpecificStrings(sequence, 'one one one on one two');
+        // TODO ! because of current logic, this only detects once, but the string is technically present twice 
+        testSpecificStrings(sequence, 'one on one on one one');
+
+        // another tricky example :
+        testSpecificStrings('one x one onx', 'one x one one x one onx');
     });
 
     describe("detecting 34345", () => {
         testSpecificStrings('34345', '3434345');
     });
+
+    // describe("detecting a very tricky example", () => {
+    //     testSpecificStrings('34345', '3434345');
+    // });
 
     describe("detecting substring in longer string multiple times", () => {
         testSpecificStrings('sam', 'so sam went to the store sasasam was sad.', 2);
