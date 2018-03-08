@@ -116,7 +116,9 @@ The algorithm in this package efficiently disposes of typed characters that don'
 
 # Interesting properties 
 
-Coincidentally, if you view this method of matching the end of the input as a stream, it yields a highly efficient solution for a substring match algorithm.  
+Coincidentally, the method of matching the end of the input and iteratively discarding characters that don't match produces a highly efficient solution for a sub-array match algorithm.  Check out the code example above titled 'Use the findMatchFactory directly.' 
+
+You could also use this algorithm in a stream. 
 
 # Everything is unit tested and beautiful
 
