@@ -1,6 +1,6 @@
+"use strict";
 
 
-// const findMatchStream = require('./src/findMatchStream.js')
 const findMatchFactory = require('./src/findMatchFactory');
 const { Readable, Writable, Transform } = require('stream');
 
@@ -11,7 +11,7 @@ class Accumulator extends Transform {
         super(substring);
         this.findMatch = findMatchFactory(substring.split(''), currArr => {
             ++this.count;
-            this.push(`\n I found ${this.count} instances of 'ron'`);
+            this.push(`\n I found ${this.count} instances of '${substring}'`);
         });
         this.count = 0;
     }
@@ -25,7 +25,9 @@ class Accumulator extends Transform {
 const arr = 'ron ald is raw ro ro ro ron hey moron.'.split('');
 const readString = new Readable({
     read(currCount) {
-        this.push(arr.length ? arr.shift() : null); // pushing null closes stream
+        const curr = arr.shift();
+        // console.log('search for substring : ', curr)
+        this.push(arr.length ? curr : null); // pushing null closes stream
     }
 });
 
