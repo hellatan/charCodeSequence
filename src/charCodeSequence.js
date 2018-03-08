@@ -1,5 +1,9 @@
 "use strict";
 
+
+const findMatchFactory = require('./findMatchFactory');
+
+
 function charCodeSequence(charArr = [], callback) {
     const findMatch = findMatchFactory(charArr, callback);
     let currLength = findMatch.currArr.length;

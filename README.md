@@ -6,14 +6,14 @@ Once the key sequence is detected a callback in invoked.
 # Usage
 
 ``` javascript 
-const { listen, konami, findMatchFactory } = require('char-code-sequence');
+const { listenKeypress, konami, findMatchFactory } = require('char-code-sequence');
 ```
 
 ## Supply an array of charCodes to listen for :
 
 ``` javascript 
 const nameArray = [114, 111, 110]; // my name 'ron'
-const findNameMatch = listen(nameArray, () => console.log('boo yah, typed the whole thing.')));
+const findNameMatch = listenKeypress(nameArray, () => console.log('boo yah, typed the whole thing.')));
 
 // access the current store of typed charCodes
 console.log(findNameMatch.currArr);
