@@ -9,7 +9,7 @@ const { Readable, Writable, Transform } = require('stream');
  * can be used in a Node.js process with streams to detect that a particular
  * sequence passes through the stream. 
  */
-class Accumulator extends Transform {
+class FindSequence extends Transform {
 
     constructor(subArray) {
         super(subArray);
@@ -36,5 +36,5 @@ const readString = new Readable({
 });
 
 readString
-    .pipe(new Accumulator(['d', 'e', 'r']))
+    .pipe(new FindSequence(['d', 'e', 'r']))
     .pipe(process.stdout);
