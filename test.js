@@ -5,31 +5,30 @@ const findMatchFactory = require('./src/findMatchFactory');
 const { Readable, Writable, Transform } = require('stream');
 
 
+class Accumulator extends Transform {
 
-const findMatch = findMatchFactory('ron'.split(''), currArr => {
-    ++accumulator.count;
-    accumulator.push(`\n I found ${accumulator.count} instances of 'ron'`);
-});
+    constructor(substring) {
+        super(substring);
+        this.findMatch = findMatchFactory(substring.split(''), currArr => {
+            ++this.count;
+            this.push(`\n I found ${this.count} instances of 'ron'`);
+        });
+        this.count = 0;
+    }
 
-const accumulator = new Transform({
-
-    readableObjectMode: true,
-
-    transform(chunk, encoding, callback) {
-        findMatch(chunk.toString());
+    _transform(chunk, encoding, callback) {
+        this.findMatch(chunk.toString());
         callback();
     }
-});
-accumulator.count = 0;
+};
 
 const arr = 'ron ald is raw ro ro ro ron hey moron.'.split('');
-let idx = -1; 
 const readString = new Readable({
     read(currCount) {
-        this.push(arr[++idx] ? arr[idx] : null);
+        this.push(arr.length ? arr.shift() : null); // pushing null closes stream
     }
 });
 
 readString
-    .pipe(accumulator)
+    .pipe(new Accumulator('ron'))
     .pipe(process.stdout);
