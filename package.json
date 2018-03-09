@@ -1,6 +1,6 @@
 {
   "name": "char-code-sequence",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "detect that a sequence of characters was pressed in succession",
   "main": "index.js",
   "repository": "git@github.com:nameofname/charCodeSequence.git",
