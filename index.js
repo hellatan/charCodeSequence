@@ -6,6 +6,6 @@ var findMatchFactory = require('./dist/findMatchFactory');
 var charCodeSequence = require('./dist/charCodeSequence');
 
 
-module.exports.listenKeypress = function(arr, callback) { charCodeSequence(arr, callback); };
-module.exports.konami = function(callback) { charCodeSequence(konamiSeries, callback); };
+module.exports.listenKeypress = function(arr, callback) { return charCodeSequence(arr, callback); };
+module.exports.konami = function(callback) { return charCodeSequence(konamiSeries, callback); };
 module.exports.findMatchFactory = findMatchFactory;
