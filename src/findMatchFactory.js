@@ -9,12 +9,17 @@
  * currArr = [a, b, a, b, a];
  * in this case you can still keep [a, b, a] from the end of currArr, but you have to throw out [a, b] from the front
  *
- * Uses  recursion, take the case of :
+ * Uses a while loop, take the case of :
  * charArr  = [one me on]
  * typedArr = [oni me one]
  *
  * I would work backwards matching the e from "one" to the e from "me" - but that doesn't fit, i need to fall back again
  * until i hit the first e, from "one."
+ *
+ Another example : 
+ * charArr  = [one man one mat]
+ * typedArr = [one man one man]
+ * In this case, let the "n" from "man" fall back until it reaches the first "man".
  * @param charArr
  * @param currArr
  * @param currI
