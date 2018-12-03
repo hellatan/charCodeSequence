@@ -6,7 +6,7 @@ Once the key sequence is detected a callback in invoked.
 # Usage
 
 ``` javascript 
-const { listenKeypress, konami, findMatchFactory } = require('char-code-sequence');
+const { listenKeypress, findMatchFactory } = require('char-code-sequence');
 ```
 
 ## Supply an array of charCodes to listen for :
@@ -14,9 +14,11 @@ const { listenKeypress, konami, findMatchFactory } = require('char-code-sequence
 ``` javascript 
 const nameArray = [114, 111, 110]; // my name 'ron'
 const findNameMatch = listenKeypress(nameArray, () => console.log('boo yah, typed the whole thing.'));
+console.log(findNameMatch.currArr); // access the current store of typed charCodes
 
-// access the current store of typed charCodes
-console.log(findNameMatch.currArr);
+// Use a normal string like so: 
+const stringArr = "destroy!".split('').map(letter => letter.charCodeAt()); // [ 100, 101, 115, 116, 114, 111, 121, 33 ]
+listenKeypress(stringArr, () => console.log('destroy everything!'));
 ```
 
 NOTE* This function works in Node.js - but it's essentially a no-op since no document object exists
@@ -53,7 +55,8 @@ findNameMatch.onChange(({ currArr, event }) => {
 ## Built in support to listen for the konami code :
 
 ```javascript
-charCodeSequence.konami(myCallback); // [up, up, down, down, left, right, left, right, 'b', 'a']
+const { konami } = require('char-code-sequence');
+konami(myCallback); // [up, up, down, down, left, right, left, right, 'b', 'a']
 ```
 
 
