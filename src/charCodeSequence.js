@@ -2,7 +2,6 @@
 
 
 const findMatchFactory = require('./findMatchFactory');
-function noop() {}
 
 
 function charCodeSequence(charArr = [], callback) {
