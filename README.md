@@ -70,7 +70,7 @@ Try the following in your browser's console :
 
 ```javascript
     document.addEventListener('keydown', e => console.log('keydown', e.which)); // logs the keyCode
-    document.addEventListener('keypress', e => console.log('keydown', e.which)); // logs the charCode
+    document.addEventListener('keypress', e => console.log('keypress', e.which)); // logs the charCode
 ```
 
 The key code corresponds to a key on the keyboard that was pressed, while the charCode corresponds to a unicode character that was typed. 
